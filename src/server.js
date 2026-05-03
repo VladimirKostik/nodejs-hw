@@ -53,12 +53,12 @@ app.use((req, res) => {
 });
 
 // error middleware
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   const isProd = process.env.NODE_ENV === 'production';
 
   res.status(500).json({
     message: isProd ? 'Щось пішло не так :)' : err.stack,
-  });
+  });  
 });
 
 app.listen(PORT, () => {
