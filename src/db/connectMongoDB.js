@@ -10,3 +10,4 @@ export const connectMongoDB = async () => {
     throw error;
   }
 };
+
