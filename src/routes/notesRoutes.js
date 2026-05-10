@@ -1,17 +1,9 @@
 import { Router } from 'express';
 
+import { getAllNotes } from '../controllers/notesController.js';
+
 const router = Router();
 
-router.get('/notes', (req, res) => {
-  res.status(200).json({
-    message: 'Retrieved all notes',
-  });
-});
-
-router.get('/notes/:noteId', (req, res) => {
-  res.status(200).json({
-    message: `Retrieved note with ID: ${req.params.noteId}`,
-  });
-});
+router.get('/notes', getAllNotes);
 
 export default router;
