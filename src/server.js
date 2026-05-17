@@ -1,4 +1,5 @@
 import express from 'express';
+import { errors } from 'celebrate';
 import cors from 'cors';
 import helmet from 'helmet';
 import 'dotenv/config';
@@ -22,6 +23,9 @@ app.use(logger);
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
+
+app.use(errors());
+
 app.use(errorHandler);
 
 await connectMongoDB();
