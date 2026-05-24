@@ -56,7 +56,10 @@ router.delete(
 
 router.patch(
   '/notes/:noteId',
-  celebrate(updateNoteSchema),
+  celebrate({
+    params: updateNoteSchema.params,
+    body: updateNoteSchema.body,
+  }),
   updateNote,
 );
 
