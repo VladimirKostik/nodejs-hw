@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import { celebrate } from 'celebrate';
 
 import {
@@ -16,36 +16,48 @@ import {
   updateNoteSchema,
 } from '../validations/notesValidation.js';
 
-const router = express.Router();
+import { authenticate } from '../middleware/authenticate.js';
+
+const router = Router();
+
+router.use(authenticate);
 
 router.get(
   '/notes',
-  celebrate(getAllNotesSchema),
-  getAllNotes
+  celebrate({
+    query: getAllNotesSchema,
+  }),
+  getAllNotes,
 );
 
 router.get(
   '/notes/:noteId',
-  celebrate(noteIdSchema),
-  getNoteById
+  celebrate({
+    params: noteIdSchema,
+  }),
+  getNoteById,
 );
 
 router.post(
   '/notes',
-  celebrate(createNoteSchema),
-  createNote
+  celebrate({
+    body: createNoteSchema,
+  }),
+  createNote,
 );
 
 router.delete(
   '/notes/:noteId',
-  celebrate(noteIdSchema),
-  deleteNote
+  celebrate({
+    params: noteIdSchema,
+  }),
+  deleteNote,
 );
 
 router.patch(
   '/notes/:noteId',
   celebrate(updateNoteSchema),
-  updateNote
+  updateNote,
 );
 
 export default router;
