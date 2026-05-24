@@ -8,7 +8,10 @@ export const authenticate = async (
   res,
   next,
 ) => {
-  const { accessToken } = req.cookies;
+  const {
+    accessToken,
+    sessionId,
+  } = req.cookies;
 
   if (!accessToken) {
     throw createHttpError(
@@ -17,7 +20,15 @@ export const authenticate = async (
     );
   }
 
+  if (!sessionId) {
+    throw createHttpError(
+      401,
+      'Session not found',
+    );
+  }
+
   const session = await Session.findOne({
+    _id: sessionId,
     accessToken,
   });
 
