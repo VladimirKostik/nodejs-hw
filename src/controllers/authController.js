@@ -14,7 +14,7 @@ import path from 'path';
 import jwt from 'jsonwebtoken';
 import handlebars from 'handlebars';
 
-import { sendMail } from '../utils/sendMail.js';
+import { sendEmail } from '../utils/sendMail.js';
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -224,11 +224,11 @@ export const requestResetEmail = async (
   });
 
   try {
-    await sendMail({
-      to: user.email,
-      subject: 'Reset password',
-      html,
-    });
+    await sendEmail({
+  to: user.email,
+  subject: 'Reset password',
+  html,
+});
   } catch {
     throw createHttpError(
       500,
