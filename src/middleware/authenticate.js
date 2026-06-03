@@ -9,21 +9,14 @@ export const authenticate = async (
   next,
 ) => {
   const {
-    accessToken,
     sessionId,
+    accessToken,
   } = req.cookies;
 
-  if (!accessToken) {
+  if (!sessionId || !accessToken) {
     throw createHttpError(
       401,
       'Missing access token',
-    );
-  }
-
-  if (!sessionId) {
-    throw createHttpError(
-      401,
-      'Session not found',
     );
   }
 
@@ -39,11 +32,10 @@ export const authenticate = async (
     );
   }
 
-  const isAccessTokenExpired =
+  if (
     new Date() >
-    new Date(session.accessTokenValidUntil);
-
-  if (isAccessTokenExpired) {
+    new Date(session.accessTokenValidUntil)
+  ) {
     throw createHttpError(
       401,
       'Access token expired',

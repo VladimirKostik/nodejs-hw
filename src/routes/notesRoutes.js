@@ -20,7 +20,7 @@ import { authenticate } from '../middleware/authenticate.js';
 
 const router = Router();
 
-router.use(authenticate);
+router.use('/notes', authenticate);
 
 router.get(
   '/notes',
