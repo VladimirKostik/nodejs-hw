@@ -30,12 +30,12 @@ app.use(cookieParser());
 
 app.use(logger);
 
+// Routes
 app.use(notesRoutes);
-
 app.use(authRoutes);
+app.use(userRouter);
 
-app.use('/users', userRouter);
-
+// Handlers
 app.use(notFoundHandler);
 
 app.use(errors());

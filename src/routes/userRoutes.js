@@ -8,7 +8,7 @@ import { updateUserAvatar } from '../controllers/userController.js';
 const userRouter = Router();
 
 userRouter.patch(
-  '/me/avatar',
+  '/users/me/avatar',
   authenticate,
   upload.single('avatar'),
   updateUserAvatar,
